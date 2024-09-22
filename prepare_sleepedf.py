@@ -23,6 +23,7 @@ ann2label = {
     "Movement time": 5
 }
 
+os.chdir("/home/gs/code/high-density-eeg-analysis/tinysleepnet/")
 
 def main():
     parser = argparse.ArgumentParser()
@@ -92,8 +93,13 @@ def main():
         if select_ch_idx == -1:
             raise Exception("Channel not found.")
         sampling_rate = psg_f.getSampleFrequency(select_ch_idx)
+
         n_epoch_samples = int(epoch_duration * sampling_rate)
-        signals = psg_f.readSignal(select_ch_idx).reshape(-1, n_epoch_samples)
+
+        print(select_ch_idx, n_epoch_samples, epoch_duration, sampling_rate)
+
+        signals = psg_f.readSignal(select_ch_idx)[:90000 * (7950000 // 90000)].reshape(-1, n_epoch_samples)
+
         logger.info("Select channel: {}".format(select_ch))
         logger.info("Select channel samples: {}".format(ch_samples[select_ch_idx]))
         logger.info("Sample rate: {}".format(sampling_rate))
@@ -191,4 +197,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
