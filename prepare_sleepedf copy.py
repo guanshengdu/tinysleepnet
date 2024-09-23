@@ -61,9 +61,9 @@ def main():
     psg_fnames = np.asarray(psg_fnames)
     ann_fnames = np.asarray(ann_fnames)
 
-    for i in range(len(psg_fnames)):
-    # i = 3
-    # while i == 3:   
+    # for i in range(len(psg_fnames)):
+    i = 1
+    while i == 1:   
 
         logger.info("Loading ...")
         logger.info("Signal file: {}".format(psg_fnames[i]))
@@ -137,7 +137,7 @@ def main():
             duration_epoch = int(duration_sec / epoch_duration)
 
             # Generate sleep stage labels
-            label_epoch = np.ones(duration_epoch, dtype=int) * label
+            label_epoch = np.ones(duration_epoch, dtype=np.int) * label
             labels.append(label_epoch)
 
             total_duration += duration_sec
