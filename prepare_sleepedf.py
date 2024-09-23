@@ -23,6 +23,7 @@ ann2label = {
     "Movement time": 5
 }
 
+# GD
 os.chdir("/home/gs/code/high-density-eeg-analysis/tinysleepnet/")
 
 def main():
@@ -96,6 +97,7 @@ def main():
 
         n_epoch_samples = int(epoch_duration * sampling_rate)
 
+        # GS
         print(select_ch_idx, n_epoch_samples, epoch_duration, sampling_rate)
 
         signals = psg_f.readSignal(select_ch_idx)[:90000 * (7950000 // 90000)].reshape(-1, n_epoch_samples)
