@@ -3,8 +3,8 @@ import numpy as np
 import sklearn.metrics as skmetrics
 import tensorflow as tf
 import timeit
-import tensorflow.contrib.metrics as contrib_metrics
-import tensorflow.contrib.slim as contrib_slim
+import tensorflow_addons.metrics as contrib_metrics
+import tf_slim as contrib_slim
 
 import nn
 
@@ -455,7 +455,7 @@ class TinySleepNet(object):
         )
         logger.info("Saved best checkpoint to {}".format(path))
 
-    def save_weights(self, scope, name, key_variables=tf.GraphKeys.TRAINABLE_VARIABLES):
+    def save_weights(self, scope, name, key_variables=tf.compat.v1.GraphKeys.TRAINABLE_VARIABLES):
         # Save weights
         path = os.path.join(self.weights_path, "{}.npz".format(name))
         logger.info("Saving weights in scope: {} to {}".format(scope, path))
@@ -468,7 +468,12 @@ class TinySleepNet(object):
             os.makedirs(self.weights_path)
         np.savez(path, **save_dict)
 
-    def load_weights(self, scope, weight_file, key_variables=tf.GraphKeys.TRAINABLE_VARIABLES):
+    def load_weights(
+        self,
+        scope,
+        weight_file,
+        key_variables=tf.compat.v1.GraphKeys.TRAINABLE_VARIABLES,
+    ):
         # Load weights
         logger.info("Loading weights in scope: {} from {}".format(scope, weight_file))
         cnn_vars = tf.get_collection(key_variables, scope=scope)
@@ -503,4 +508,5 @@ if __name__ == "__main__":
     model = Model(config=pretrain, output_dir="./output/test", use_rnn=False)
     tf.reset_default_graph()
     from config import finetune
-    model = Model(config=finetune, output_dir="./output/test", use_rnn=True)
+
+    model = TinySleepNet(config=finetune, output_dir="./output/test", use_rnn=True)
