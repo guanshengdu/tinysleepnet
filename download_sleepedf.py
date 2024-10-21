@@ -2,6 +2,9 @@ import os
 import hashlib
 import wget
 
+
+print(f"Current working directory is: {os.getcwd()}")
+# os.chdir("/cfs/earth/scratch/dugua001/tinysleepnet/")
 sleepedf_url = "https://www.physionet.org/files/sleep-edfx/1.0.0"
 output_dir = os.path.join("./data", "sleepedf")
 record_file = os.path.join(output_dir, "sleepedf_records.txt")
@@ -42,4 +45,3 @@ with open(record_file) as f:
                 assert sha256hash == readable_hash
 
                 print(f'Downloaded {save_f}')
-

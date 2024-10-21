@@ -24,7 +24,7 @@ ann2label = {
 }
 
 # GD
-os.chdir("/home/gs/code/high-density-eeg-analysis/")
+# os.chdir("/home/gs/code/high-density-eeg-analysis/")
 
 def main():
     parser = argparse.ArgumentParser()
